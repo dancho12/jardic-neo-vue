@@ -1,0 +1,78 @@
+/* @import './base.css'; */
+
+
+/* :root {
+    --find-color: #e86969;
+    --reading-color: #D16464;
+    --kanji-color: #1297E0;
+    --text-color: #000000;
+    --special-color-1: #A0A0A0;
+    --special-color-2: #2ECC71;
+    --main-background-color: #FFF;
+    --cards-background-color: #ECF0F1;
+    --accent-color: #D16464;
+    --accent-color-hover: #e86969;
+    --accent-color-gray: #D0D0D0;
+    --paginator-hover: rgba(160, 160, 160, 0.16);
+    --skeleton-0: #c2cfd6;
+    --skeleton-100: #f0f3f5;
+} */
+
+:root {
+    --find-color: #e86969;
+    --reading-color: #D16464;
+    --kanji-color: #29C5FF;
+    --text-color: #fff;
+    --special-color-1: #A0A0A0;
+    --special-color-2: #2ECC71;
+    --main-background-color: #404040;
+    --cards-background-color: #303030;
+    --accent-color: #D16464;
+    --accent-color-hover: #e86969;
+    --accent-color-gray: #D0D0D0;
+    --paginator-hover: rgba(255, 255, 255, 0.08);
+    --skeleton-0: #808080;
+    --skeleton-100: #a9adb0;
+}
+
+#app {
+    /* max-width: 1280px; */
+    margin: 0 auto;
+    font-weight: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans', 'Noto Sans JP', serif;
+    font-size: 16px;
+}
+
+
+/* width */
+
+ ::-webkit-scrollbar {
+    width: 6px !important;
+    height: 10px !important;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: var(--main-background-color) !important;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: var(--accent-color) !important;
+    border-radius: 20px !important;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color-hover) !important;
+}

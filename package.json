@@ -1,0 +1,23 @@
+{
+  "name": "jardic-neo",
+  "version": "0.0.11",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.4",
+    "cheerio": "^1.0.0-rc.12",
+    "unirest": "^0.6.0",
+    "vue": "^3.3.4",
+    "vue-i18n": "^9.9.0",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.1",
+    "sass": "^1.66.1",
+    "vite": "^4.4.9"
+  }
+}
