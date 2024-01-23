@@ -8,7 +8,7 @@
                 <div class="elem" v-for="d in selectedDic_l">{{ d }}</div>
             </div>
 
-            <SVGIcon v-if="search_tmp != ''" @click="clear_input()" :name="'close-circle'"
+            <SVGIcon class="search-box-close-btn" v-if="search_tmp != ''" @click="clear_input()" :name="'close-circle'"
                 :color="'var(--accent-color-gray)'" :size="25" />
             <div :title="$t('nav.search.open_dic')" class="search-box-dic"
                 @click="dic_list_open = dic_list_open == true ? false : true">
@@ -261,6 +261,10 @@ export default defineComponent({
                 overflow: hidden;
             }
 
+        }
+
+        &-close-btn {
+            cursor: pointer;
         }
 
     }

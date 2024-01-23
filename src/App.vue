@@ -102,7 +102,7 @@ export default defineComponent({
 
     const router = useRouter()
     const route = useRoute()
-    let urlParams = new URLSearchParams(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
     const search = ref(urlParams.has('q') ? urlParams.get('q') : '')
 
     provide('search', search)
@@ -176,6 +176,13 @@ export default defineComponent({
     const open_search_mob = ref(window.location.pathname == '/search' ? true : false)
     const open_nav_mob = ref(false)
 
+    watch(route, () => {
+      if (route.path == '/search') {
+        urlParams = new URLSearchParams(window.location.search);
+        search.value = urlParams.has('q') ? urlParams.get('q') : ''
+        t.value = generateRandomString(10);
+      }
+    })
 
     function back_btn() {
 
