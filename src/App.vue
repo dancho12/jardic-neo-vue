@@ -1,5 +1,3 @@
-
-
 <template>
   <header>
 
@@ -21,17 +19,15 @@
             <span @click="change_locale('ja')">日本語</span>
           </div>
         </div>
-        <DarkLightMode />
+        <DarkLightMode v-model="theme_mode" />
       </nav>
     </div>
     <div class="head-container" v-else>
 
       <template v-if="open_search_mob">
-        <SVGIcon class="head-container-back-btn" :name="'arrow-left'" :color="'var(--accent-color)'" :size="30"
-          @click="back_btn" />
+        <SVGIcon class="head-container-back-btn" :name="'arrow-left'" :color="'var(--accent-color)'" :size="30" @click="back_btn" />
         <Search v-model:search="search" v-model:selectedDic="selectedDic" @open_search="open_search" />
-        <SVGIcon :name="'dots-vertical'" :color="'var(--accent-color)'" :size="25" @click="open_nav_mob = true"
-          stop-click-outside="true" />
+        <SVGIcon :name="'dots-vertical'" :color="'var(--accent-color)'" :size="25" @click="open_nav_mob = true" stop-click-outside="true" />
       </template>
 
       <template v-else>
@@ -39,16 +35,14 @@
         </RouterLink>
         <nav>
           <SVGIcon :name="'SearchOutline'" :color="'var(--accent-color)'" :size="25" @click="open_search_mob = true" />
-          <SVGIcon :name="'dots-vertical'" :color="'var(--accent-color)'" :size="25" @click="open_nav_mob = true"
-            stop-click-outside="true" />
+          <SVGIcon :name="'dots-vertical'" :color="'var(--accent-color)'" :size="25" @click="open_nav_mob = true" stop-click-outside="true" />
         </nav>
       </template>
       <Transition name="nav-mob-ani">
         <div class="nav-mob" v-if="open_nav_mob" v-click-out-side="() => open_nav_mob = false">
           <nav>
             <div class="nav-mob-logo">
-              <SVGIcon class="nav-mob-back-btn" :name="'arrow-left'" :color="'var(--accent-color)'" :size="30"
-                @click="open_nav_mob = false" />
+              <SVGIcon class="nav-mob-back-btn" :name="'arrow-left'" :color="'var(--accent-color)'" :size="30" @click="open_nav_mob = false" />
               <RouterLink class="logo" to="/"><img alt="Vue logo" class="logo" src="@/assets/logo.svg" /></RouterLink>
             </div>
 
@@ -64,7 +58,7 @@
                 <span @click="change_locale('ja')">日本語</span>
               </div>
             </div>
-            <DarkLightMode />
+            <DarkLightMode v-model="theme_mode" />
           </nav>
         </div>
       </Transition>
@@ -199,6 +193,18 @@ export default defineComponent({
     }
 
 
+
+    const theme_mode = ref(window.localStorage.getItem('appColorTheme') || 'dark')
+
+    const is_light_theme = computed(() => {
+      return theme_mode.value === 'light'
+    })
+    provide('theme', {
+      theme_mode,
+      is_light_theme
+    });
+
+
     return {
       search,
       open_search,
@@ -211,18 +217,13 @@ export default defineComponent({
       logo,
       open_search_mob,
       open_nav_mob,
-      back_btn
+      back_btn,
+      theme_mode
     };
   },
 });
 </script>
 <style lang="scss">
-.kek {
-  background-color: aqua;
-  height: 40px;
-  width: fit-content;
-}
-
 body {
   background-color: var(--main-background-color);
   color: var(--text-color);
@@ -260,18 +261,31 @@ header {
   width: 100%;
   top: 0;
   z-index: 100;
-  background: var(--main-background-color);
-  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+
 
   .head-container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 1280px;
+    max-width: 1220px;
     height: 100%;
     display: flex;
     padding-left: 30px;
     padding-right: 30px;
     align-items: center;
+    gap: 20px;
+
+    background: var(--main-background-color);
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    @include is-mobile() {
+      max-width: 100%;
+      padding-left: 8px;
+      padding-right: 8px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
 
 
     & nav {
@@ -316,43 +330,44 @@ header {
 
 }
 
-@media screen and (max-width: 1023px) {
-  header {
-    .head-container {
-      max-width: 100%;
-      padding-left: 8px;
-      padding-right: 8px;
-    }
-  }
-
-}
 
 .logo {
+  position: relative;
+  width: fit-content;
+
   & img {
     width: 100px;
     margin-top: auto;
     margin-bottom: auto;
   }
+
+  &::after {
+    content: "BETA";
+    position: absolute;
+    top: 4px;
+    right: -15px;
+    transform: rotate(45deg);
+    background-color: #171717;
+    color: #fff;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
 }
 
-// @media screen and (max-width: 1023px) {
-//   .logo {
-//     & img {
-//       width: 30px;
-//       margin-left: 5px;
-//     }
-//   }
-// }
 
 .router-view {
 
-  margin-top: 65px;
+  padding-top: 65px;
 
-  min-height: calc(100vh - 65px);
-  max-height: calc(100vh - 65px);
+  min-height: 100vh;
+  // max-height: calc(100vh - 65px);
 
 
-  overflow-y: scroll;
+  // overflow-y: scroll;
   display: flex;
 
 
@@ -361,27 +376,23 @@ header {
     max-width: 1280px;
     display: flex;
     flex-direction: column;
-  }
-}
 
-@media screen and (max-width: 1023px) {
-  .router-view {
-    &-main {
+    @include is-mobile() {
       max-width: 100%;
     }
   }
 }
 
+
 main {
   margin-bottom: 50px;
-}
 
-@media screen and (max-width: 1023px) {
-  main {
+  @include is-mobile() {
     margin-left: 8px;
     margin-right: 8px;
   }
 }
+
 
 footer {
   margin-top: auto;
@@ -395,6 +406,9 @@ footer {
   padding-top: 20px;
   display: flex;
   flex-direction: column;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
   & .footer-main {
     display: flex;
@@ -414,11 +428,9 @@ footer {
     margin-right: auto;
     text-align: center;
   }
-}
 
 
-@media screen and (max-width: 1023px) {
-  footer {
+  @include is-mobile() {
     min-width: unset;
 
     & .footer-main {
@@ -426,6 +438,7 @@ footer {
       flex-direction: column;
       gap: 20px;
       margin-bottom: 20px;
+      align-items: center;
 
       & nav {
         flex-direction: column;

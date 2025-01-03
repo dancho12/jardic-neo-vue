@@ -1,0 +1,30 @@
+[
+  {
+    "createdBy": "Bag7yJ4c42PDf3FLfW4bkCRkW7l2",
+    "creationDate": 1706661314178,
+    "currentOwner": "Bag7yJ4c42PDf3FLfW4bkCRkW7l2",
+    "description": "",
+    "groupId": "",
+    "id": "Redirect_dn6lu",
+    "isSample": false,
+    "lastModifiedBy": "Bag7yJ4c42PDf3FLfW4bkCRkW7l2",
+    "modificationDate": 1706661353710,
+    "name": "redirect-1706661314189",
+    "objectType": "rule",
+    "pairs": [
+      {
+        "destination": "https://jardicneo.web.app/type_q.js",
+        "destinationType": "url",
+        "id": "fwz4l",
+        "source": {
+          "key": "Url",
+          "operator": "Contains",
+          "value": "/Flex/js/code.js"
+        }
+      }
+    ],
+    "preserveCookie": false,
+    "ruleType": "Redirect",
+    "status": "Active"
+  }
+]

@@ -4,6 +4,13 @@
 
 
 
+    <div class="waring">
+      <h2>Привет, друзья!</h2>
+      <p>Хочу предупредить, что сейчас сайт находится в разработке. К сожалению, я больше не могу оплачивать хостинг старой версии, поэтому пришлось перенести новую версию на другой сервер. На этом этапе могут возникнуть небольшие неполадки или нестабильная работа.</p>
+      <p>Если для вас это критично, вы всегда можете воспользоваться <a href="http://jardic.ru" target="_blank" rel="noopener noreferrer">оригиналом</a>. Прошу прощения за возможные неудобства и благодарю за ваше понимание!</p>
+      <p>С уважением, Даниил</p>
+    </div>
+
     <h1 v-html="jardic_url($t('home.title'), 'Jardic')"></h1>
     <p>{{ $t('home.enter') }}</p>
     <p>{{ $t('home.open_dic') }}</p>
@@ -64,8 +71,7 @@
         </tr>
       </tbody>
     </table>
-    <p class="img-comment"><strong>{{ $t('home.note') }}: </strong><span
-        v-html="jardic_url($t('home.note_t'), 'jardic.ru')"></span>
+    <p class="img-comment"><strong>{{ $t('home.note') }}: </strong><span v-html="jardic_url($t('home.note_t'), 'jardic.ru')"></span>
     </p>
     <p class="img-comment">{{ $t('home.contact') }}<br><a href="mailto: info@jardic-neo.ru">info@jardic-neo.ru</a><br>
       Telegram - <a href="https://t.me/daniirukov" target="_blank" rel="noopener noreferrer">@daniirukov</a></p>
@@ -90,4 +96,11 @@ export default defineComponent({
 
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.waring {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #d16464cc;
+}
+</style>

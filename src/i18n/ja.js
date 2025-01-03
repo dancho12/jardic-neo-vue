@@ -2,7 +2,7 @@ export default {
 
     nav: {
         search: {
-            find: "サーチ",
+            find: "検索",
             placeholder: " 検索語を入力してください",
             open_dic: "辞書を開く"
         },

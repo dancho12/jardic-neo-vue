@@ -123,7 +123,8 @@ export default defineComponent({
             for (const dic_k in selectedDic.value) {
                 dic += "&" + dic_k + "=1"
             }
-            var url = 'https://www.jardic-neo.ru/mirror?q=' + q.value + dic + '&page=' + cur_page.value
+            var url = 'https://us-central1-word-exp.cloudfunctions.net/fetchWebsiteContent?q=' + q.value + dic + '&page=' + cur_page.value
+            // var url = 'https://www.jardic.ru/search/search_r.php?q=' + q.value + dic + '&pg=' + cur_page.value
             console.log(url);
             axios.get(url)
                 .then(response => {

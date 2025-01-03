@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script >
+<script>
 import { defineComponent, ref, computed, onBeforeMount } from 'vue'
 
 
@@ -20,8 +20,15 @@ const reverseThemeSchema = {
 
 export default defineComponent({
   name: 'DarkLightMode',
-
-  setup() {
+  props: {
+    modelValue: {
+      type: String,
+      required: true,
+      default: () => 'dark'
+    },
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     onBeforeMount(() => {
       changeColorSchema()
     })
@@ -29,7 +36,8 @@ export default defineComponent({
     const APP_COLOR_THEME_DARK = 'dark'
     const APP_COLOR_THEME_LIGHT = 'light'
 
-    const mode = ref(window.localStorage.getItem('appColorTheme') || APP_COLOR_THEME_DARK)
+    const mode = ref(props.modelValue)
+
     const switcherBackgroundColor = computed(() => {
       return {
         'background-color': mode.value === APP_COLOR_THEME_DARK ? '#ffffff' : '#373737'
@@ -39,73 +47,20 @@ export default defineComponent({
     function toggleColorTheme() {
       mode.value = reverseThemeSchema[mode.value]
       window.localStorage.setItem('appColorTheme', mode.value)
-
+      emit("update:modelValue", mode.value);
       changeColorSchema()
+
     }
 
     function changeColorSchema() {
-
-
-
-      let dark = {
-        '--find-color': '#e86969',
-        '--reading-color': '#D16464',
-        '--kanji-color': '#29C5FF',
-        '--text-color': '#fff',
-        '--special-color-1': '#A0A0A0',
-        '--special-color-2': '#2ECC71',
-        '--main-background-color': '#404040',
-        '--cards-background-color': '#303030',
-        '--accent-color': '#D16464',
-        '--accent-color-hover': '#e86969',
-        '--accent-color-gray': '#D0D0D0',
-        '--paginator-hover': 'rgba(255, 255, 255, 0.08)',
-        '--skeleton-0': '#808080',
-        '--skeleton-100': '#a9adb0'
-      }
-      let light = {
-        '--find-color': '#e86969',
-        '--reading-color': '#D16464',
-        '--kanji-color': '#1297E0',
-        '--text-color': '#000000',
-        '--special-color-1': '#A0A0A0',
-        '--special-color-2': '#2ECC71',
-        '--main-background-color': '#FFF',
-        '--cards-background-color': '#ECF0F1',
-        '--accent-color': '#D16464',
-        '--accent-color-hover': '#e86969',
-        '--accent-color-gray': '#D0D0D0',
-        '--paginator-hover': 'rgba(160, 160, 160, 0.16)',
-        '--skeleton-0': '#c2cfd6',
-        '--skeleton-100': '#f0f3f5'
-      }
-
-      if (mode.value === APP_COLOR_THEME_LIGHT) {
-
-        for (const key in light) {
-          document.documentElement.style.setProperty(key, light[key])
-        }
-
-        // document.documentElement.style.setProperty('--main-text-color', '#2e2e2e')
-        // document.documentElement.style.setProperty('--main-color', '#2e2e2e')
-        // document.documentElement.style.setProperty('--background-color', '#ffffff')
-        // document.documentElement.style.setProperty('--secondary-color', '#f4f4f4')
-      } else {
-
-        for (const key in dark) {
-          document.documentElement.style.setProperty(key, dark[key])
-        }
-        // document.documentElement.style.setProperty('--main-text-color', '#ffffff')
-        // document.documentElement.style.setProperty('--main-color', '#373737')
-        // document.documentElement.style.setProperty('--background-color', '#191919')
-        // document.documentElement.style.setProperty('--secondary-color', '#1f1f1f')
-      }
+      document.documentElement.setAttribute('data-theme', mode.value);
     }
 
+
     return {
+      switcherBackgroundColor,
       mode,
       toggleColorTheme,
-      switcherBackgroundColor,
       APP_COLOR_THEME_DARK,
       APP_COLOR_THEME_LIGHT
     }
@@ -125,8 +80,8 @@ export default defineComponent({
 }
 
 .dark-light-mode__swither {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   border-radius: 100%;
   background-size: cover;

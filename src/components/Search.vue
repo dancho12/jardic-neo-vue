@@ -2,23 +2,19 @@
     <div class="search">
         <div class="search-box" :class="{ 'error': box_error }" v-click-out-side="() => dic_list_open = false">
             <SVGIcon class="search-box-img" :name="'SearchOutlineBlack'" :color="'var(--accent-color-gray)'" :size="24" />
-            <input ref="query" type="text" :placeholder="$t('nav.search.placeholder')" :value="search" @input="inputHandler"
-                @keyup.enter="open_search">
+            <input ref="query" type="text" :placeholder="$t('nav.search.placeholder')" :value="search" @input="inputHandler" @keyup.enter="open_search">
             <div class="search-box-sel-list">
                 <div class="elem" v-for="d in selectedDic_l">{{ d }}</div>
             </div>
 
-            <SVGIcon class="search-box-close-btn" v-if="search_tmp != ''" @click="clear_input()" :name="'close-circle'"
-                :color="'var(--accent-color-gray)'" :size="25" />
-            <div :title="$t('nav.search.open_dic')" class="search-box-dic"
-                @click="dic_list_open = dic_list_open == true ? false : true">
+            <SVGIcon class="search-box-close-btn" v-if="search_tmp != ''" @click="clear_input()" :name="'close-circle'" :color="'var(--accent-color-gray)'" :size="25" />
+            <div :title="$t('nav.search.open_dic')" class="search-box-dic" @click="dic_list_open = dic_list_open == true ? false : true">
                 <SVGIcon :name="'book-search'" :color="'var(--accent-color)'" :size="25" />
             </div>
 
             <div class="search-box-dic-list" v-if="dic_list_open">
                 <div v-for="(dic, index) in dicListObject" class="search-box-dic-list-checkbox" @click="checkDic(index)">
-                    <SVGIcon :name="hasDic(index) ? 'checkbox-outline' : 'checkbox-blank-outline'"
-                        :color="'var(--accent-color)'" :size="25" />
+                    <SVGIcon :name="hasDic(index) ? 'checkbox-outline' : 'checkbox-blank-outline'" :color="'var(--accent-color)'" :size="25" />
                     <span>{{ dic }}</span>
                 </div>
             </div>
@@ -171,7 +167,7 @@ export default defineComponent({
 .search {
 
     display: flex;
-    gap: 4px;
+    gap: 6px;
 
     &-box {
 
@@ -179,7 +175,6 @@ export default defineComponent({
             box-shadow: 0px 0px 7px 9px rgba(231, 76, 60, 0.2);
         }
 
-        margin-left: 30px;
         min-width: 650px;
         width: auto;
         height: 36px;
@@ -287,17 +282,12 @@ export default defineComponent({
             background-color: var(--accent-color-hover);
         }
     }
-}
 
-
-@media screen and (max-width: 1023px) {
-
-    .search {
+    @include is-mobile() {
         width: 100%;
         position: relative;
 
         &-box {
-            margin-left: 0px;
             min-width: calc(100% - 48px);
 
             &-img {
@@ -356,8 +346,7 @@ export default defineComponent({
                 background-color: white
             }
         }
-
-
     }
+
 }
 </style>
